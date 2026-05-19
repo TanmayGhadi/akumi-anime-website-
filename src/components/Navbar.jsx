@@ -324,7 +324,7 @@ export default function Navbar({ activeTab, setActiveTab, onAnimeClick, onUpgrad
             className="w-9 h-9 rounded-full overflow-hidden border-2 border-neon-blue shadow-[0_0_8px_rgba(0,240,255,0.4)] hover:border-neon-pink hover:shadow-[0_0_8px_rgba(255,0,127,0.4)] transition-all duration-300 cursor-pointer"
           >
             <img 
-              src="/cyber_profile.png" 
+              src={`${import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/cyber_profile.png`} 
               alt="Cyber User Profile" 
               className="w-full h-full object-cover"
             />

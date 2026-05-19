@@ -975,7 +975,10 @@ export const getStreamingRedirectUrl = (anime) => {
 
 // Dynamically generate/retrieve beautiful real backdrops for all anime, handling missing/placeholder ones
 export const getAnimeBackdrop = (anime) => {
-  if (!anime) return '/solo leveling.webp';
+  const base = import.meta.env.BASE_URL || '/';
+  const prefixPath = (path) => `${base.endsWith('/') ? base.slice(0, -1) : base}${path}`;
+
+  if (!anime) return prefixPath('/solo leveling.webp');
   
   // 1. Custom user-provided local backdrops mapped accurately (served from public folder)
   const localBackdrops = {
@@ -1015,13 +1018,13 @@ export const getAnimeBackdrop = (anime) => {
   const titleLower = anime.title ? anime.title.toLowerCase() : '';
   
   if (localBackdrops[id]) {
-    return localBackdrops[id];
+    return prefixPath(localBackdrops[id]);
   }
 
   // Check fuzzy matches for local backdrops
   for (const [key, path] of Object.entries(localBackdrops)) {
     if (titleLower.includes(key.replace(/-/g, ' ')) || id.includes(key)) {
-      return path;
+      return prefixPath(path);
     }
   }
 
@@ -1102,7 +1105,10 @@ export const getAnimeBackdrop = (anime) => {
 
 // Dynamically generate/retrieve beautiful real posters for all anime, prioritizing local ones
 export const getAnimePoster = (anime) => {
-  if (!anime) return '/solo leveling.webp';
+  const base = import.meta.env.BASE_URL || '/';
+  const prefixPath = (path) => `${base.endsWith('/') ? base.slice(0, -1) : base}${path}`;
+
+  if (!anime) return prefixPath('/solo leveling.webp');
 
   // Custom user-provided local posters mapped accurately (served from public folder)
   const localPosters = {
@@ -1143,13 +1149,13 @@ export const getAnimePoster = (anime) => {
   const titleLower = anime.title ? anime.title.toLowerCase() : '';
   
   if (localPosters[id]) {
-    return localPosters[id];
+    return prefixPath(localPosters[id]);
   }
 
   // Check fuzzy matches for local posters
   for (const [key, path] of Object.entries(localPosters)) {
     if (titleLower.includes(key.replace(/-/g, ' ')) || id.includes(key)) {
-      return path;
+      return prefixPath(path);
     }
   }
 
